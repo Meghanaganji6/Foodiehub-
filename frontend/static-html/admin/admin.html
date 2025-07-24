@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FoodieHub - Admin Panel</title>
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+  <i class="fas fa-utensils"></i> FoodieHub
+</div>
+    <nav class="navbar">
+      <a href="user/login.html">Login</a>
+      <a href="user/signup.html">Signup</a>
+      <a href="../user/menu.html">Menu</a>
+      <a href="../home.html">Logout</a>
+
+    </nav>
+  </header>
+  <main class="admin-container">
+    <!-- Add New Dish -->
+    <section class="admin-section">
+      <h2>Add New Dish</h2>
+      <form id="add-dish-form">
+        <input type="text" placeholder="Dish Name" required />
+        <input type="text" placeholder="Category" required />
+        <input type="number" placeholder="Price (₹)" required />
+        <select required>
+          <option value="">Veg/Non-Veg</option>
+          <option value="veg">Veg</option>
+          <option value="nonveg">Non-Veg</option>
+        </select>
+        <input type="url" placeholder="Image URL" required />
+        <button type="submit">Add Dish</button>
+      </form>
+    </section>
+
+    <!-- Manage Menu Items -->
+    <section class="admin-section">
+      <h2>Manage Menu Items</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Dish</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Veg</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="menu-items-list">
+         
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Orders Section -->
+    <section class="admin-section">
+      <h2>Orders</h2>
+      <div class="order-stats">
+        <div class="stat-box">
+          <span class="stat-num" id="total-orders">0</span>
+          <span>Total Orders</span>
+        </div>
+         <div class="stat-box">
+          <span class="stat-num preparing" id="preparing-orders">0</span>
+          <span>Preparing</span>
+        </div> 
+        <div class="stat-box">
+          <span class="stat-num done" id="done-orders">0</span>
+          <span>Orders Done</span>
+        </div>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Items</th>
+            <th>User</th>
+            <th>Timings</th>
+            <th>Status</th>
+            <th>Change Status</th>
+          </tr>
+        </thead>
+        <tbody id="orders-list">
+          <!-- Example row -->
+          <tr>
+            <td>#1001</td>
+            <td>Burger, Fries</td>
+            <td>megha@gmail.com</td>
+            <td><span class="status preparing">Preparing</span></td>
+            <td>
+              <button class="mark-done-btn">Mark as Done</button>
+            </td>
+          </tr>
+          <!-- More rows dynamically -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+ <!-- Footer -->
+  <footer>
+  <!-- About -->
+  <div class="footer-info">
+    <p>
+      <strong>About SRKR College Canteen:</strong><br>
+      The SRKR Engineering College canteen serves as a hub of tasty, hygienic, and affordable food for students and staff. 
+      From snacks to full meals, we ensure a variety of fresh and energizing options daily. 
+      Open daily from <strong>8:00 AM to 6:00 PM</strong>.
+    </p>
+  </div>
+
+  <!-- Social Links -->
+  <div class="footer-links">
+  <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+  <a href="mailto:foodiehub@college.edu"><i class="fas fa-envelope"></i></a>
+</div>
+
+
+  <!-- Feedback Form -->
+  <div class="footer-feedback">
+    <p>
+      <strong>Feedback</strong><br>
+    <form>
+      <textarea placeholder="Your Feedback..." rows="3" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</footer>
+<script src="admin.js"></script>

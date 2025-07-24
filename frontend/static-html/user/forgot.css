@@ -1,0 +1,195 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') no-repeat center center/cover;
+}
+
+/* Header */
+header {
+  background-color: #ff6347;
+  padding: 1.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo i {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.navbar a {
+  margin-left: 1.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+.navbar a:hover {
+  background-color: #ff8267;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: 8rem auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  color: #090909;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  background-color: #ff6347;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.links {
+  margin-top: 1rem;
+}
+.links a {
+  color: #ff8267;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+
+/* Footer */
+footer {
+  background-color: #222;
+  color: #ccc;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  text-align: left;
+}
+
+/* Left: About Info */
+.footer-info {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Center: Social Links */
+.footer-links {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #ccc;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #ff6347;
+}
+
+
+
+/* Right: Feedback */
+.footer-feedback {
+  flex: 1;
+}
+.footer-feedback form {
+  display: flex;
+  flex-direction: column;
+}
+.footer-feedback input,
+.footer-feedback textarea {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+.footer-feedback button {
+  background-color: #ff6347;
+  color: white;
+  width: 120px;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.footer-feedback button:hover {
+  filter: brightness(1.1);
+}
+
+/* ...existing code... */
+#forgot-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+#forgot-form label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.3rem;
+}
+
+#forgot-form input[type="email"],
+#forgot-form input[type="password"] {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#forgot-form button {
+  background: linear-gradient(45deg, #ff6347, #ff8267);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 0.7rem 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#forgot-form button:hover {
+  background: #ff8267;
+  transform: scale(1.04);
+}

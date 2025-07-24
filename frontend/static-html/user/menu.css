@@ -1,0 +1,488 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fffaf5;
+  color: #333;
+   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+  filter: blur(6px);
+  z-index: -1; /* pushes the background behind content */
+  opacity: 0.75; /* slightly faded for better readability */
+}
+
+/* Header */
+header {
+  background-color: #ff6347;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+.logo {
+  font-size: 1.7rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.navbar a {
+  margin-left: 1rem;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+.navbar a:hover,
+.navbar a.active {
+  background-color: #ff8267;
+  transform: translateY(-2px);
+}
+
+/* Cart Icon */
+.cart-link {
+  position: relative;
+}
+#cart-count {
+  background: white;
+  color: #ff6347;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
+
+/* Menu Section */
+.menu-section {
+  padding: 3rem 2rem;
+  text-align: center;
+   flex: 1;
+}
+.menu-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #ff4c2c;
+  font-weight: bolder;
+  padding-bottom: 10px;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+/* Food Card */
+.food-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s;
+  transform-style: preserve-3d;
+  min-width: 260px;           /* Ensures all cards have the same minimum width */
+  max-width: 320px;           /* Prevents cards from stretching too wide */
+  width: 100%;                /* Card fills its grid cell */
+  box-sizing: border-box;
+}
+.food-card:hover {
+  transform: translateY(-8px) scale(1.03) rotateX(3deg) rotateY(3deg);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2), 0 0 10px rgba(255, 99, 71, 0.3);
+}
+.food-card.hide {
+  display: none !important; /* Use display: none instead of opacity/transform */
+  pointer-events: none;
+}
+.food-img {
+  height: 180px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.food-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.food-card:hover .food-img img {
+  transform: scale(1.1);
+}
+.food-info {
+  padding: 1rem;
+}
+.food-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ff6347;
+  margin-bottom: 0.8rem;
+}
+.add-cart-btn {
+  background: linear-gradient(45deg, #ff6347, #ff6347);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s, filter 0.2s;
+}
+.add-cart-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+.add-cart-btn.added {
+  animation: cartShake 0.4s ease;
+}
+@keyframes cartShake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+/* Fly to Cart Image */
+.fly-img {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  z-index: 1000;
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+/* Footer */
+footer {
+  background-color: #222;
+  color: #ccc;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  text-align: left;
+}
+
+/* Left: About Info */
+.footer-info {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Center: Social Links */
+.footer-links {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #ccc;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #ff6347;
+}
+
+
+
+/* Right: Feedback */
+.footer-feedback {
+  flex: 1;
+}
+.footer-feedback form {
+  display: flex;
+  flex-direction: column;
+}
+.footer-feedback input,
+.footer-feedback textarea {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+.footer-feedback button {
+  background-color: #ff6347;
+  color: white;
+  width: 120px;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.footer-feedback button:hover {
+  filter: brightness(1.1);
+}
+
+
+/* Search & Filter Controls */
+.menu-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+#search-bar {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 220px;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+#search-bar:focus {
+  border-color: #ff6347;
+  outline: none;
+}
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+.filter-buttons button {
+  background: #eee;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.filter-buttons button.active,
+.filter-buttons button:hover {
+  background: #ff6347;
+  color: white;
+}
+
+/* Quick View Modal */
+.modal {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+.modal-img img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.modal-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.modal-price {
+  font-size: 1.3rem;
+  color: #ff6347;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.close-btn:hover {
+  color: #ff6347;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Toast Notification */
+#toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  animation: slideIn 0.4s ease, fadeOut 0.4s ease 2.6s;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translateX(100%); }
+}
+
+/* Add at the end of menu.css or with your button styles */
+.go-to-cart-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  bottom: 100px; /* Adjust so it sits above the footer */
+  z-index: 999;
+   pointer-events: none;
+}
+
+.go-to-cart-btn {
+  background: linear-gradient(45deg, #f85539, #e83010);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.2s, filter 0.2s;
+  pointer-events: auto; /* Allows button to be clickable */
+}
+
+.go-to-cart-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Veg Mode Toggle */
+.menu-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.veg-mode-toggle {
+  position: static; /* Remove absolute positioning */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto; /* Push switch to the right end of the row */
+}
+
+.veg-label {
+  color: #ff6347;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Custom Switch */
+.veg-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.veg-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #eee;
+  border-radius: 24px;
+  transition: background 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ff6347;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.veg-switch input:checked + .slider {
+  background-color: #72f669;
+}
+
+.veg-switch input:checked + .slider:before {
+  transform: translateX(24px);
+  background-color: #228B22;
+}

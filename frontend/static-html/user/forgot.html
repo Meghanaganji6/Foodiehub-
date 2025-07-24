@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password - FoodieHub</title>
+  <link rel="stylesheet" href="forgot.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+   <!-- Header -->
+  <header>
+    <div class="logo">
+  <i class="fas fa-utensils"></i> FoodieHub
+</div>
+    <nav class="navbar">
+      <!-- <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="profile.html">Profile</a> -->
+      <a href="login.html">Login</a> 
+      <a href="signup.html">Signup</a>
+      <a href="../home.html">Home</a>
+    </nav>
+  </header>
+
+  <!-- Forgot Password Form -->
+  <main class="form-container">
+    <h2>Forgot Password?</h2>
+    <form id="forgot-form">
+  <label for="email">Enter Your Registered Email</label>
+  <input type="email" id="email" placeholder="Enter your email" required />
+
+  <div id="new-password-section" style="display:none;">
+    <label for="new-password">Enter New Password</label>
+    <input type="password" id="new-password" placeholder="New password" required />
+
+    <div id="confirm-password-section" style="display:none;">
+      <label for="confirm-password">Confirm New Password</label>
+      <input type="password" id="confirm-password" placeholder="Confirm password" required />
+    </div>
+  </div>
+
+  <button type="submit" id="reset-btn" style="display:none;">Reset Password</button>
+  <button type="button" id="next-btn">Next</button>
+</form>
+    <div class="links">
+      <a href="login.html">Back to Login</a> | 
+      <a href="signup.html">Create New Account</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+  <!-- About -->
+  <div class="footer-info">
+    <p>
+      <strong>About SRKR College Canteen:</strong><br>
+      The SRKR Engineering College canteen serves as a hub of tasty, hygienic, and affordable food for students and staff. 
+      From snacks to full meals, we ensure a variety of fresh and energizing options daily. 
+      Open daily from <strong>8:00 AM to 6:00 PM</strong>.
+    </p>
+  </div>
+
+  <!-- Social Links -->
+  <div class="footer-links">
+  <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+  <a href="mailto:foodiehub@college.edu"><i class="fas fa-envelope"></i></a>
+</div>
+
+
+  <!-- Feedback Form -->
+  <div class="footer-feedback">
+    <p>
+      <strong>Feedback</strong><br>
+    <form>
+      <textarea placeholder="Your Feedback..." rows="3" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</footer>
+
+<script src="forgot.js"></script>
