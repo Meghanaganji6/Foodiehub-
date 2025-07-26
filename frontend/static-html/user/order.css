@@ -1,28 +1,13 @@
 /* Reset */
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #fffaf5, #ffe7e0);
   color: #333;
-  display: grid;
-  height: 100%;
-  margin: 0;
-}
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
-  filter: blur(6px);
-  z-index: -1; /* pushes the background behind content */
-  opacity: 0.75; /* slightly faded for better readability */
-}
-
-main {
-flex: 1; /* Push footer down */
- padding: 2rem;
 }
 
 /* Header */
@@ -33,6 +18,7 @@ header {
   justify-content: space-between;
   align-items: center;
   color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 .logo {
   font-size: 1.7rem;
@@ -40,7 +26,15 @@ header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  animation: slide-in-left 0.8s ease;
 }
+.logo i {
+  font-size: 1.5rem;
+  color: white;
+  animation: rotateIcon 5s infinite linear; /* Continuous rotation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .navbar a {
   margin-left: 1rem;
   color: white;
@@ -48,33 +42,37 @@ header {
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  transition: background 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
 }
 .navbar a.active,
 .navbar a:hover {
   background-color: #ff8267;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* Order Section */
 .order-section {
   padding: 2rem;
+  animation: fade-in 1s ease;
 }
 .order-title {
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.3rem;
   color: #ff6347;
   margin-bottom: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 .cart-container {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   max-width: 1000px;
   margin: auto;
   overflow-x: auto;
-  margin-bottom: 70px;
+  animation: scale-up 0.6s ease;
 }
 .cart-table {
   width: 100%;
@@ -85,10 +83,15 @@ header {
   padding: 0.8rem;
   text-align: center;
   border-bottom: 1px solid #eee;
+  transition: background 0.3s;
+}
+.cart-table tr:hover td {
+  background: rgba(255, 99, 71, 0.05);
 }
 .cart-table th {
   background: #ff6347;
   color: white;
+  font-weight: bold;
 }
 .quantity-btn {
   padding: 0.3rem 0.6rem;
@@ -99,9 +102,11 @@ header {
   cursor: pointer;
   border-radius: 4px;
   font-size: 0.9rem;
+  transition: all 0.2s ease;
 }
 .quantity-btn:hover {
   background: #ff8267;
+  transform: scale(1.1);
 }
 .remove-btn {
   background: none;
@@ -109,6 +114,10 @@ header {
   color: red;
   font-size: 1.2rem;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+.remove-btn:hover {
+  transform: rotate(15deg) scale(1.2);
 }
 .cart-summary {
   display: flex;
@@ -116,20 +125,35 @@ header {
   align-items: center;
   font-size: 1.3rem;
   font-weight: bold;
+  margin-top: 1rem;
 }
 .checkout-btn {
   background: linear-gradient(45deg, #ff6347, #ff8267);
   color: white;
   border: none;
-  padding: 0.6rem 1.5rem;
-  border-radius: 25px;
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
-  transition: transform 0.2s, filter 0.2s;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(255, 99, 71, 0.3);
+  transition: all 0.3s ease;
 }
 .checkout-btn:hover {
   transform: scale(1.05);
-  filter: brightness(1.1);
+  box-shadow: 0 6px 15px rgba(255, 99, 71, 0.5);
+  background: linear-gradient(45deg, #ff8267, #ff6347);
+}
+
+/* Empty Cart Message */
+#cart-items:empty::after {
+  content: "Your cart is empty!";
+  display: block;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.3rem;
+  color: #555;
+  animation: fade-in 0.8s ease;
 }
 
 /* Footer */
@@ -147,9 +171,9 @@ footer {
   left: 0;
   right: 0; 
   bottom: 0;
-    width: 100%;
-    z-index: 1000; /* Ensure footer is above other content */
-    box-sizing: border-box; /* Add this */
+  width: 100%;
+  z-index: 1000; /* Ensure footer is above other content */
+  box-sizing: border-box;
   overflow-x: hidden; 
 }
 
@@ -180,8 +204,6 @@ footer {
   color: #ff6347;
 }
 
-
-
 /* Right: Feedback */
 .footer-feedback {
   flex: 1;
@@ -209,4 +231,71 @@ footer {
 }
 .footer-feedback button:hover {
   filter: brightness(1.1);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-up {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes slide-in-left {
+  from { transform: translateX(-50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Logo Rotation & Hover Effects */
+@keyframes rotateIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes wobble {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-10deg); }
+  50%  { transform: rotate(10deg); }
+  75%  { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes glowingPulse {
+  0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 99, 71, 0.3); }
+  100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 99, 71, 0.8); }
+}
+
+/* Bump Animation for Row */
+.cart-row.bump {
+  animation: bump 0.3s ease;
+}
+@keyframes bump {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); background-color: #ffe4de; }
+  100% { transform: scale(1); background-color: transparent; }
+}
+
+/* Checkout Success Popup */
+.success-popup {
+  position: fixed;
+  top: 20px;
+  right: -300px;
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 1000;
+}
+.success-popup i {
+  font-size: 1.4rem;
+}
+.success-popup.show {
+  right: 20px;
+  opacity: 1;
 }

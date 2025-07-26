@@ -8,21 +8,6 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #fffaf5;
   color: #333;
-   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
-  filter: blur(6px);
-  z-index: -1; /* pushes the background behind content */
-  opacity: 0.75; /* slightly faded for better readability */
 }
 
 /* Header */
@@ -41,6 +26,15 @@ header {
   align-items: center;
   gap: 0.5rem;
 }
+
+.logo i {
+  font-size: 1.5rem;
+  color: white;
+  animation: rotateIcon 5s infinite linear; /* Logo rotation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
 .navbar a {
   margin-left: 1rem;
   color: white;
@@ -72,18 +66,75 @@ header {
   right: -10px;
 }
 
+/* ===========================
+   VEG MODE TOGGLE
+=========================== */
+.veg-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.veg-label {
+  color: #ff6347;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.veg-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.veg-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #eee;
+  border-radius: 24px;
+  transition: background 0.3s;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ff6347;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.veg-switch input:checked + .slider {
+  background-color: #72f669;
+}
+
+.veg-switch input:checked + .slider:before {
+  transform: translateX(24px);
+  background-color: #228B22;
+}
+
+
 /* Menu Section */
 .menu-section {
   padding: 3rem 2rem;
   text-align: center;
-   flex: 1;
 }
 .menu-title {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  color: #ff4c2c;
-  font-weight: bolder;
-  padding-bottom: 10px;
+  color: #ff6347;
 }
 .menu-grid {
   display: grid;
@@ -99,17 +150,14 @@ header {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s;
   transform-style: preserve-3d;
-  min-width: 260px;           /* Ensures all cards have the same minimum width */
-  max-width: 320px;           /* Prevents cards from stretching too wide */
-  width: 100%;                /* Card fills its grid cell */
-  box-sizing: border-box;
 }
 .food-card:hover {
   transform: translateY(-8px) scale(1.03) rotateX(3deg) rotateY(3deg);
   box-shadow: 0 8px 18px rgba(0,0,0,0.2), 0 0 10px rgba(255, 99, 71, 0.3);
 }
 .food-card.hide {
-  display: none !important; /* Use display: none instead of opacity/transform */
+  opacity: 0;
+  transform: scale(0.9);
   pointer-events: none;
 }
 .food-img {
@@ -140,7 +188,7 @@ header {
   margin-bottom: 0.8rem;
 }
 .add-cart-btn {
-  background: linear-gradient(45deg, #ff6347, #ff6347);
+  background: linear-gradient(45deg, #ff6347, #ff8267);
   color: white;
   border: none;
   padding: 0.5rem 1.2rem;
@@ -176,76 +224,58 @@ header {
   pointer-events: none;
 }
 
+/* ===========================
+   GO TO CART BUTTON
+=========================== */
+.go-to-cart-container {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  bottom: 100px;
+  width: 100%;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.go-to-cart-btn {
+  background: linear-gradient(45deg, #f85539, #e83010);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.2s, filter 0.2s;
+  pointer-events: auto;
+}
+
+.go-to-cart-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+
 /* Footer */
 footer {
   background-color: #222;
   color: #ccc;
-  padding: 2rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-  text-align: left;
-}
-
-/* Left: About Info */
-.footer-info {
-  flex: 1;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-/* Center: Social Links */
-.footer-links {
-  flex: 1;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 20px;
 }
-
 .footer-links a {
   color: #ccc;
-  font-size: 1.5rem;
-  text-decoration: none;
+  font-size: 1.4rem;
+  margin-left: 1rem;
   transition: color 0.3s;
 }
-
 .footer-links a:hover {
   color: #ff6347;
 }
-
-
-
-/* Right: Feedback */
-.footer-feedback {
-  flex: 1;
-}
-.footer-feedback form {
-  display: flex;
-  flex-direction: column;
-}
-.footer-feedback input,
-.footer-feedback textarea {
-  margin-bottom: 0.75rem;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-.footer-feedback button {
-  background-color: #ff6347;
-  color: white;
-  width: 120px;
-  border: none;
-  padding: 0.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.footer-feedback button:hover {
-  filter: brightness(1.1);
-}
-
 
 /* Search & Filter Controls */
 .menu-controls {
@@ -383,106 +413,26 @@ footer {
   to { opacity: 0; transform: translateX(100%); }
 }
 
-/* Add at the end of menu.css or with your button styles */
-.go-to-cart-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  left: 0;
-  bottom: 100px; /* Adjust so it sits above the footer */
-  z-index: 999;
-   pointer-events: none;
+.food-card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.food-card.hide {
+  display: none !important;
 }
 
-.go-to-cart-btn {
-  background: linear-gradient(45deg, #f85539, #e83010);
-  color: white;
-  border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  transition: transform 0.2s, filter 0.2s;
-  pointer-events: auto; /* Allows button to be clickable */
+/* Logo Animations */
+@keyframes rotateIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
-
-.go-to-cart-btn:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
+@keyframes wobble {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-10deg); }
+  50%  { transform: rotate(10deg); }
+  75%  { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
 }
-
-/* Veg Mode Toggle */
-.menu-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.veg-mode-toggle {
-  position: static; /* Remove absolute positioning */
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: auto; /* Push switch to the right end of the row */
-}
-
-.veg-label {
-  color: #ff6347;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-/* Custom Switch */
-.veg-switch {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 24px;
-}
-
-.veg-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #eee;
-  border-radius: 24px;
-  transition: background 0.3s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: #ff6347;
-  border-radius: 50%;
-  transition: transform 0.3s;
-}
-
-.veg-switch input:checked + .slider {
-  background-color: #72f669;
-}
-
-.veg-switch input:checked + .slider:before {
-  transform: translateX(24px);
-  background-color: #228B22;
+@keyframes glowingPulse {
+  0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 99, 71, 0.3); }
+  100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 99, 71, 0.8); }
 }

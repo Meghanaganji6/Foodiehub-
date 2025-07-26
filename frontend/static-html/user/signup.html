@@ -11,33 +11,28 @@
 
   <!-- Header -->
   <header>
-    <div class="logo"><i class="fas fa-utensils"></i> FoodieHub</div>
-    <nav class="navbar">
-      <!-- <a href="user/menu.html">Menu</a>
-      <a href="user/order.html">Order</a>
-      <a href="user/profile.html">Profile</a> -->
-      <a href="login.html">Login</a> 
-      <a href="signup.html">Signup</a>
-      <a href="../home.html">Home</a>
-    </nav>
-  </header>
+  <div class="logo"><i class="fas fa-utensils"></i> FoodieHub</div>
+  <nav class="navbar">
+    <a href="../index.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Signup</a>
+  </nav>
+</header>
+
 
   <!-- Signup Form -->
   <main class="login-container">
     <h2>Create Your FoodieHub Account</h2>
-    <form>
+    <form id="signupForm">
       <label for="name">Name</label>
       <input type="text" id="name" placeholder="Enter your full name" required />
 
       <label for="email">Email</label>
       <input type="email" id="email" placeholder="Enter your email" required />
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" placeholder="Enter your phone number" required />
 
       <label for="password">Password</label>
       <input type="password" id="password" placeholder="Create a password" required />
-
 
       <button type="submit">Sign Up</button>
 
@@ -45,36 +40,84 @@
         <a href="login.html">Already have an account? Login</a>
       </div>
     </form>
+    <p id="signupMessage" style="color: red; font-weight: bold;"></p>
   </main>
 
-   <!-- Footer -->
+  <!-- Footer -->
   <footer>
-  <!-- About -->
-  <div class="footer-info">
-    <p>
-      <strong>About SRKR College Canteen:</strong><br>
-      The SRKR Engineering College canteen serves as a hub of tasty, hygienic, and affordable food for students and staff. 
-      From snacks to full meals, we ensure a variety of fresh and energizing options daily. 
-      Open daily from <strong>8:00 AM to 6:00 PM</strong>.
-    </p>
-  </div>
+    <div class="footer-info">
+      <p>
+        <strong>About SRKR College Canteen:</strong><br>
+        The SRKR Engineering College canteen serves as a hub of tasty, hygienic, and affordable food for students and staff. 
+        From snacks to full meals, we ensure a variety of fresh and energizing options daily. 
+        Open daily from <strong>8:00 AM to 6:00 PM</strong>.
+      </p>
+    </div>
 
-  <!-- Social Links -->
-  <div class="footer-links">
-  <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-  <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-  <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-  <a href="mailto:foodiehub@college.edu"><i class="fas fa-envelope"></i></a>
-</div>
+    <div class="footer-links">
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="mailto:foodiehub@college.edu"><i class="fas fa-envelope"></i></a>
+    </div>
 
+    <div class="footer-feedback">
+      <p><strong>Feedback</strong><br>
+      <form>
+        <textarea placeholder="Your Feedback..." rows="3" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </footer>
 
-  <!-- Feedback Form -->
-  <div class="footer-feedback">
-    <p>
-      <strong>Feedback</strong><br>
-    <form>
-      <textarea placeholder="Your Feedback..." rows="3" required></textarea>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-</footer>
+  <script>
+    const signupForm = document.getElementById("signupForm");
+    const signupMessage = document.getElementById("signupMessage");
+
+    signupForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          signupMessage.style.color = "green";
+          signupMessage.textContent = "Signup successful! Redirecting...";
+          setTimeout(() => window.location.href = "login.html", 2000);
+        } else {
+          signupMessage.style.color = "red";
+          signupMessage.textContent = data.message || "Signup failed";
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        signupMessage.textContent = "Server error. Try again later.";
+      }
+
+      // login.js or signup.js
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.querySelector("form");
+
+  loginForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Simulate successful login
+    localStorage.setItem("isLoggedIn", "true");
+
+    // Redirect to home page
+    window.location.href = "home.html"; // or home.html
+  });
+});
+
+    });
+  </script>
+</body>
+</html>
