@@ -1,12 +1,11 @@
-// --- Star Rating Interactivity ---
-document.querySelectorAll('.rating').forEach(ratingDiv => {
-  const stars = ratingDiv.querySelectorAll('i');
-  stars.forEach((star, idx) => {
-    star.addEventListener('click', () => {
-      stars.forEach((s, i) => {
-        s.classList.toggle('fas', i <= idx);
-        s.classList.toggle('far', i > idx);
-      });
-    });
-  });
-});
+// Assume user email is already stored securely after login
+const userEmail = "test@example.com";
+
+fetch(`http://localhost:5000/api/profile?email=${encodeURIComponent(userEmail)}`)
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("username").textContent = data.name;
+    document.getElementById("user-email").textContent = data.email;
+    // Loop and show past orders if needed
+  })
+  .catch(err => console.error("Error loading profile:", err));

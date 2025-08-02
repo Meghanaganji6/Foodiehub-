@@ -1,25 +1,13 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const express = require("express");
 const router = express.Router();
+const { registerUser, loginUser } = require("../controllers/authcontroller");
+const { forgotPassword, resetPassword } = require("../controllers/authcontroller");
 
-// For demo: hardcoded admin user
-const ADMIN = {
-  username: 'admin',
-  password: bcrypt.hashSync('admin123', 10) // store hashed password
-};
+// Routes
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 
-router.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  if (
-    username === ADMIN.username &&
-    bcrypt.compareSync(password, ADMIN.password)
-  ) {
-    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
-  } else {
-    res.status(401).json({ message: 'Invalid credentials' });
-  }
-});
 
 module.exports = router;

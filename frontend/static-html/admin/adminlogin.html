@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login - FoodieHub</title>
+  <link rel="stylesheet" href="adminlogin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <i class="fas fa-utensils"></i> FoodieHub Admin
+  </div>
+  <nav class="navbar">
+    <a href="../home.html">Home</a>
+  </nav>
+</header>
+
+<main class="login-container">
+  <h2>Admin Login</h2>
+  <form id="admin-login-form">
+    <label for="admin-email">Admin Email</label>
+    <input type="text" id="admin-email" placeholder="Enter admin email" required />
+
+    <label for="admin-password">Password</label>
+    <input type="password" id="admin-password" placeholder="Enter password" required />
+
+    <button type="submit">Login</button>
+  </form>
+</main>
+
+<footer>
+  <div class="footer-info">
+    <p>
+      <strong>FoodieHub Admin Portal:</strong><br>
+      Restricted access to admin panel. Manage menu, orders, and users.
+    </p>
+  </div>
+
+  <div class="footer-links">
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="mailto:admin@foodiehub.com"><i class="fas fa-envelope"></i></a>
+  </div>
+
+  <div class="footer-feedback">
+    <p><strong>Need Help?</strong></p>
+    <form>
+      <textarea placeholder="Message admin support..." rows="3"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</footer>
+
+<script src="adminlogin.js"></script>
+</body>
+</html>

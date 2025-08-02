@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reset Password - FoodieHub</title>
+  <link rel="stylesheet" href="/user/forgot.css" />
+  <script src="https://kit.fontawesome.com/a2e4d3fc5c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><i class="fas fa-utensils"></i> FoodieHub</div>
+    <nav class="navbar">
+      <a href="login.html">Login</a> 
+      <a href="signup.html">Signup</a>
+      <a href="home.html">Home</a>
+    </nav>
+  </header>
+
+  <main class="form-container">
+    <h2>Reset Your Password</h2>
+    <form id="reset-form">
+      <label for="new-password">New Password</label>
+      <input type="password" id="new-password" required placeholder="Enter new password" minlength="6"/>
+
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" required placeholder="Confirm new password" minlength="6"/>
+
+      <button type="submit" id="submit-btn">Reset Password</button>
+      <p id="message" class="message"></p>
+    </form>
+
+    <div class="links">
+      <a href="login.html">Back to Login</a>
+    </div>
+  </main>
+
+  <script src="/user/reset.js"></script>
+</body>
+</html>
