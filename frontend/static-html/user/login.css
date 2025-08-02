@@ -27,6 +27,7 @@ header {
   align-items: center;
   color: white;
 }
+
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -36,9 +37,12 @@ header {
   gap: 0.5rem;
 }
 
+/* Logo Icon Rotation + Hover Wobble */
 .logo i {
   font-size: 1.5rem;
   color: white;
+  animation: rotateIcon 5s infinite linear; /* Slowed down */
+  transition: transform 0.3s ease;
 }
 
 .navbar a {
@@ -201,3 +205,7 @@ footer {
   filter: brightness(1.1);
 }
 
+@keyframes rotateIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

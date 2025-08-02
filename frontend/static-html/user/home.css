@@ -8,6 +8,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #fff8f0;
   color: #333;
+  overflow-x: hidden;
 }
 
 /* Header */
@@ -18,6 +19,10 @@ header {
   justify-content: space-between;
   align-items: center;
   color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: fadeDown 1s ease forwards;
 }
 .logo {
   font-size: 1.5rem;
@@ -31,6 +36,8 @@ header {
 .logo i {
   font-size: 1.5rem;
   color: white;
+  animation: rotateIcon 5s infinite linear; /* Slowed down */
+  transition: transform 0.3s ease;
 }
 
 .navbar a {
@@ -40,10 +47,11 @@ header {
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.3s;
 }
 .navbar a:hover {
   background-color: #ff8267;
+  transform: translateY(-3px);
 }
 
 /* Hero Section */
@@ -56,15 +64,28 @@ header {
   color: white;
   text-shadow: 2px 2px 5px #000;
   text-align: center;
+  position: relative;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
 }
 .hero-content {
   background-color: rgba(0, 0, 0, 0.4);
   padding: 2rem 3rem;
   border-radius: 10px;
+  z-index: 1;
+  animation: fadeUp 1s ease forwards;
 }
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1.5rem;
+  animation: textPop 1.2s ease forwards;
 }
 .hero-btn {
   display: inline-block;
@@ -91,6 +112,7 @@ footer {
   flex-wrap: wrap;
   gap: 2rem;
   text-align: left;
+  animation: fadeUp 1.5s ease forwards;
 }
 
 /* Left: About Info */
@@ -113,14 +135,13 @@ footer {
   color: #ccc;
   font-size: 1.5rem;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s, transform 0.3s;
 }
 
 .footer-links a:hover {
   color: #ff6347;
+  transform: scale(1.2);
 }
-
-
 
 /* Right: Feedback */
 .footer-feedback {
@@ -130,7 +151,6 @@ footer {
   display: flex;
   flex-direction: column;
 }
-.footer-feedback input,
 .footer-feedback textarea {
   margin-bottom: 0.75rem;
   padding: 0.5rem;
@@ -146,7 +166,56 @@ footer {
   padding: 0.5rem;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 .footer-feedback button:hover {
   filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes textPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes rotateIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.bounce {
+  animation: bounceAnim 1.5s infinite;
+}
+@keyframes bounceAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Scroll Reveal (initial state) */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-in-out;
+}
+
+/* When visible */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.navbar-profile-pic {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  object-fit: cover;
 }

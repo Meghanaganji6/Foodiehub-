@@ -14,6 +14,7 @@ function renderCart() {
     total += itemTotal;
 
     const row = document.createElement("tr");
+    row.classList.add("cart-row");
     row.innerHTML = `
       <td>${item.name}</td>
       <td>₹${item.price}</td>
@@ -32,13 +33,14 @@ function renderCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Update item quantity
+// Update item quantity with bump animation
 function updateQuantity(index, change) {
   cart[index].quantity += change;
   if (cart[index].quantity <= 0) {
     cart.splice(index, 1);
   }
   renderCart();
+  triggerBumpEffect(index);
 }
 
 // Remove an item
@@ -47,41 +49,79 @@ function removeItem(index) {
   renderCart();
 }
 
-// Initial render
-renderCart();
+// Trigger bump animation on a row
+function triggerBumpEffect(index) {
+  const rows = document.querySelectorAll(".cart-row");
+  if (rows[index]) {
+    rows[index].classList.add("bump");
+    setTimeout(() => rows[index].classList.remove("bump"), 300);
+  }
+}
 
-// Checkout button
-// Checkout button
+// Checkout button click
 document.querySelector(".checkout-btn").addEventListener("click", async () => {
   if (cart.length === 0) {
     alert("Your cart is empty!");
     return;
   }
 
-  try {
-    const user = localStorage.getItem("userEmail") || "guest"; // Replace with actual user login system
-    const items = cart.map(item => `${item.name} x${item.quantity}`);
+  const token = localStorage.getItem("token"); // JWT token from login
+  if (!token) {
+    alert("Please login to place an order!");
+    window.location.href = "login.html";
+    return;
+  }
 
+  const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  try {
     const response = await fetch("http://localhost:5000/api/orders", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
-      body: JSON.stringify({ items, user })
+      body: JSON.stringify({
+        items: cart,
+        totalAmount // required by backend
+      })
     });
 
     const data = await response.json();
 
     if (response.ok) {
-      alert("Order placed successfully!\n Your order would be ready within 20 minutes\n Thank you for your purchase!");
+      showSuccessPopup();
       localStorage.removeItem("cart");
       cart = [];
       renderCart();
     } else {
-      alert("Failed to place order: " + data.error);
+      alert(data.message || "Failed to place order");
     }
   } catch (error) {
-    alert("Error placing order.");
-    console.error(error);
+    console.error("Error placing order:", error);
+    alert("Server error while placing order");
   }
 });
+
+// Show success popup
+function showSuccessPopup() {
+  const popup = document.createElement("div");
+  popup.className = "success-popup";
+  popup.innerHTML = `
+    <i class="fas fa-check-circle"></i>
+    <p>Order Placed Successfully!</p>
+  `;
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.classList.add("show");
+  }, 10);
+
+  setTimeout(() => {
+    popup.classList.remove("show");
+    setTimeout(() => popup.remove(), 500);
+  }, 2000);
+}
+
+// Initial render
+renderCart();
